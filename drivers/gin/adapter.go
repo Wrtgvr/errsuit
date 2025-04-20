@@ -2,11 +2,11 @@ package ginadapter
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/wrtgvr2/errsuit/core"
+	"github.com/wrtgvr2/errsuit"
 )
 
 func HandleError(c *gin.Context, err error) {
-	appErr := core.AsAppError(err)
+	appErr := errsuit.AsAppError(err)
 
 	if appErr.ShouldLog() {
 		appErr.LogError()
