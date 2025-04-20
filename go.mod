@@ -1,4 +1,4 @@
-module github.com/wrtgvr/errsuit
+module github.com/wrtgvr2/errsuit
 
 go 1.24.0
 
