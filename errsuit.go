@@ -7,14 +7,21 @@ import (
 	"net/http"
 )
 
+// AppError represents a structured application error with optional logging and HTTP compatibility.
 type AppError struct {
-	Type    string `json:"type"`
+	// Type categorizes the error (e.g., "not_found", "internal").
+	Type string `json:"type"`
+	// Message is the error message shown to clients.
 	Message string `json:"message"`
-	Code    int    `json:"code"`
-	Err     error  `json:"-"`
-	Log     bool   `json:"-"`
+	// Code is the HTTP status code returned in responses.
+	Code int `json:"code"`
+	// Err is the original internal error (not included in JSON response).
+	Err error `json:"-"`
+	// Log indicates whether the error should be logged automatically.
+	Log bool `json:"-"`
 }
 
+// Error returns a formatted string for the error.
 func (e *AppError) Error() string {
 	if e.Err != nil {
 		return fmt.Sprintf("%s: %v", e.Message, e.Err)
@@ -22,14 +29,17 @@ func (e *AppError) Error() string {
 	return e.Message
 }
 
+// ShouldLog tells whether the error should be logged by a driver.
 func (e *AppError) ShouldLog() bool {
 	return e.Log
 }
 
+// LogError logs the error via the standard log package.
 func (e *AppError) LogError() {
-	log.Print(e.Error())
+	log.Println(e.Error())
 }
 
+// New creates a new AppError.
 func New(msg string, code int, typ string, err error, log bool) *AppError {
 	if err == nil {
 		err = errors.New(msg)
@@ -43,6 +53,7 @@ func New(msg string, code int, typ string, err error, log bool) *AppError {
 	}
 }
 
+// AsAppError converts any error into AppError.
 func AsAppError(err error) *AppError {
 	if err == nil {
 		return nil
@@ -53,21 +64,25 @@ func AsAppError(err error) *AppError {
 	return New("internal error", http.StatusInternalServerError, TypeInternal, err, true)
 }
 
+// Error types
 const (
-	TypeBadRequest = "bad_request"
-	TypeNotFound   = "not_found"
-	TypeInternal   = "internal"
+	TypeBadRequest   = "bad_request"
+	TypeNotFound     = "not_found"
+	TypeInternal     = "internal"
+	TypeUnauthorized = "unauthorized"
 )
 
-// Shortcuts
-func NewBadRequest(msg string, err error) *AppError {
-	return New(msg, http.StatusBadRequest, TypeBadRequest, err, false)
+// NewBadRequest returns a bad request error.
+func NewBadRequest(msg string, err error, log bool) *AppError {
+	return New(msg, http.StatusBadRequest, TypeBadRequest, err, log)
 }
 
-func NewNotFound(msg string, err error) *AppError {
-	return New(msg, http.StatusNotFound, TypeNotFound, err, false)
+// NewNotFound returns a not found error.
+func NewNotFound(msg string, err error, log bool) *AppError {
+	return New(msg, http.StatusNotFound, TypeNotFound, err, log)
 }
 
-func NewInternal(msg string, err error) *AppError {
-	return New(msg, http.StatusInternalServerError, TypeInternal, err, true)
+// NewInternal returns an internal error.
+func NewInternal(msg string, err error, log bool) *AppError {
+	return New(msg, http.StatusInternalServerError, TypeInternal, err, log)
 }
