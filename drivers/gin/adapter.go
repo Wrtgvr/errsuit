@@ -2,7 +2,7 @@ package ginadapter
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/wrtgvr/urlshrt/core"
+	"github.com/wrtgvr/errsuit/core"
 )
 
 func HandleError(c *gin.Context, err error) {
