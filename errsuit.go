@@ -1,4 +1,4 @@
-package core
+package errsuit
 
 import (
 	"errors"
