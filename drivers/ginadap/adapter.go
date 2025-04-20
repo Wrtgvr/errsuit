@@ -1,4 +1,4 @@
-package ginadapter
+package ginadap
 
 import (
 	"github.com/gin-gonic/gin"
