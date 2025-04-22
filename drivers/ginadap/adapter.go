@@ -9,7 +9,7 @@ import (
 // If err is type of `error` then converts it to `AppError`.
 // Return `false` if err is nil, otherwise return true.
 func HandleError(c *gin.Context, err error) bool {
-	if err == nil {
+	if err == nil || err.(*errsuit.AppError) == nil {
 		return false
 	}
 	appErr := errsuit.AsAppError(err)
