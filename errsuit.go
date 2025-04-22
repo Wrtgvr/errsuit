@@ -70,4 +70,6 @@ const (
 	TypeNotFound     = "not_found"
 	TypeInternal     = "internal"
 	TypeUnauthorized = "unauthorized"
+	TypeForbidden    = "forbidden"
+	TypeConflict     = "conflict"
 )
