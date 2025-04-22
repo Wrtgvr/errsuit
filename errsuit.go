@@ -59,6 +59,9 @@ func AsAppError(err error) *AppError {
 		return nil
 	}
 	if appErr, ok := err.(*AppError); ok {
+		if appErr == nil {
+			return New("internal error", http.StatusInternalServerError, TypeInternal, nil, true)
+		}
 		return appErr
 	}
 	return New("internal error", http.StatusInternalServerError, TypeInternal, err, true)
