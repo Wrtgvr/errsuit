@@ -17,7 +17,17 @@ func NewInternal(msg string, err error, log bool) *AppError {
 	return New(msg, http.StatusInternalServerError, TypeInternal, err, log)
 }
 
-// NewInternal returns an unauthorized error.
+// NewUnauthorized returns an unauthorized error.
 func NewUnauthorized(msg string, err error, log bool) *AppError {
-	return New(msg, http.StatusInternalServerError, TypeInternal, err, log)
+	return New(msg, http.StatusUnauthorized, TypeInternal, err, log)
+}
+
+// NewForbidden returns an forbidden error.
+func NewForbidden(msg string, err error, log bool) *AppError {
+	return New(msg, http.StatusForbidden, TypeForbidden, err, log)
+}
+
+// NewConflict returns an unauthorized error.
+func NewConflict(msg string, err error, log bool) *AppError {
+	return New(msg, http.StatusConflict, TypeConflict, err, log)
 }
