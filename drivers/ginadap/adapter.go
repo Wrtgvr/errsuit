@@ -23,5 +23,7 @@ func HandleError(c *gin.Context, err error) bool {
 		"type":  appErr.Type,
 	})
 
+	c.Abort()
+
 	return true
 }
