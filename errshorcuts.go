@@ -19,7 +19,7 @@ func NewInternal(msg string, err error, log bool) *AppError {
 
 // NewUnauthorized returns an unauthorized error.
 func NewUnauthorized(msg string, err error, log bool) *AppError {
-	return New(msg, http.StatusUnauthorized, TypeInternal, err, log)
+	return New(msg, http.StatusUnauthorized, TypeUnauthorized, err, log)
 }
 
 // NewForbidden returns an forbidden error.
