@@ -18,8 +18,14 @@ func HandleError(c *gin.Context, err error) bool {
 		appErr.LogError()
 	}
 
+	msg := appErr.Message
+
+	if appErr.Type == errsuit.TypeInternal {
+		msg = "internal server error"
+	}
+
 	c.JSON(appErr.Code, gin.H{
-		"error": appErr.Message,
+		"error": msg,
 		"type":  appErr.Type,
 	})
 
