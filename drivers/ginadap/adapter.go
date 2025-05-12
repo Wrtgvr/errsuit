@@ -5,10 +5,22 @@ import (
 	"github.com/wrtgvr2/errsuit"
 )
 
+// Gin error handler with `errsuit.Logger`.
+type GinErrorHandler struct {
+	logger *errsuit.Logger
+}
+
+// Returns `GinErrorHandler` with given `errsuit.Logger` (may be nil).
+func NewGinErrorHandler(logger *errsuit.Logger) *GinErrorHandler {
+	return &GinErrorHandler{
+		logger: logger,
+	}
+}
+
 // Send response via gin.Context with err HTTP status code, err message and err type (type e.g. `errsuit.TypeNotFound`).
 // If err is type of `error` then converts it to `AppError`.
 // Return `false` if err is nil, otherwise return true.
-func HandleError(c *gin.Context, err error) bool {
+func (h *GinErrorHandler) HandleError(c *gin.Context, err error) bool {
 	if err == nil || err.(*errsuit.AppError) == nil {
 		return false
 	}
