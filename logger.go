@@ -18,16 +18,16 @@ type Logger struct {
 	format func(error) string
 }
 
-// Creates logger with given out and default formatter.
-func NewLogger(out io.Writer) *Logger {
+// Creates logger with given out and format func.
+func NewLogger(out io.Writer, f func(error) string) *Logger {
 	return &Logger{
 		out:    out,
-		format: defaultFormat,
+		format: f,
 	}
 }
 
 // Default error formatter.
-func defaultFormat(err error) string {
+func DefaultFormat(err error) string {
 	return fmt.Sprintf("[ERROR] %v", err)
 }
 
