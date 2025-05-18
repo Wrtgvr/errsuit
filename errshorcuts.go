@@ -27,7 +27,7 @@ func NewForbidden(msg string, err error, log bool) *AppError {
 	return New(msg, http.StatusForbidden, TypeForbidden, err, log)
 }
 
-// NewConflict returns an unauthorized error.
+// NewConflict returns an conflict error.
 func NewConflict(msg string, err error, log bool) *AppError {
 	return New(msg, http.StatusConflict, TypeConflict, err, log)
 }
