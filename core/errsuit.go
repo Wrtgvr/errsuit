@@ -6,6 +6,12 @@ import (
 	"net/http"
 )
 
+// Config
+type Config struct {
+	// Define response format (JSON, XML and etc.)
+	Format ResponseFormat
+}
+
 // AppError represents a structured application error with optional logging and HTTP compatibility.
 type AppError struct {
 	// Type categorizes the error (e.g., "not_found", "internal").
