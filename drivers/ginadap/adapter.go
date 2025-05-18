@@ -33,16 +33,7 @@ func (h *GinErrorHandler) HandleError(c *gin.Context, err error) bool {
 		}
 	}
 
-	msg := appErr.Message
-
-	if appErr.Type == errsuit.TypeInternal {
-		msg = "internal server error"
-	}
-
-	c.JSON(appErr.Code, errsuit.ErrorResponse{
-		ErrMsg: msg,
-		Typ:    appErr.Type,
-	})
+	c.JSON(appErr.Code, errsuit.BuildErrorResp(appErr))
 
 	c.Abort()
 

@@ -35,17 +35,8 @@ func (h *HttpErrorHandler) HandleError(w http.ResponseWriter, err error) bool {
 		}
 	}
 
-	msg := appErr.Message
-
-	if appErr.Type == errsuit.TypeInternal {
-		msg = "internal server error"
-	}
-
 	w.WriteHeader(appErr.Code)
-	json.NewEncoder(w).Encode(errsuit.ErrorResponse{
-		ErrMsg: msg,
-		Typ:    appErr.Type,
-	})
+	json.NewEncoder(w).Encode(errsuit.BuildErrorResp(appErr))
 
 	return true
 }
