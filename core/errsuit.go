@@ -57,13 +57,3 @@ func AsAppError(err error) *AppError {
 	}
 	return New("internal error", http.StatusInternalServerError, TypeInternal, err, true)
 }
-
-// Error types
-const (
-	TypeBadRequest   = "bad_request"
-	TypeNotFound     = "not_found"
-	TypeInternal     = "internal"
-	TypeUnauthorized = "unauthorized"
-	TypeForbidden    = "forbidden"
-	TypeConflict     = "conflict"
-)
