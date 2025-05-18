@@ -1,27 +1,29 @@
-package ginadap
+package httpadap
 
 import (
-	"github.com/gin-gonic/gin"
+	"encoding/json"
+	"net/http"
+
 	"github.com/wrtgvr2/errsuit"
 )
 
-// Gin error handler.
+// `net/http` error handler.
 // logger is optional. If logger is nil errors won't be logged.
-type GinErrorHandler struct {
+type HttpErrorHandler struct {
 	logger *errsuit.Logger
 }
 
-// Returns `GinErrorHandler` with given `errsuit.Logger` (may be nil).
-func NewGinErrorHandler(logger *errsuit.Logger) *GinErrorHandler {
-	return &GinErrorHandler{
+// Returns `HttpErrorHandler` with given `errsuit.Logger` (may be nil).
+func NewHttpErrorHandler(logger *errsuit.Logger) *HttpErrorHandler {
+	return &HttpErrorHandler{
 		logger: logger,
 	}
 }
 
-// Send response via gin.Context with err HTTP status code, err message and err type (type e.g. `errsuit.TypeNotFound`).
+// Send response via `http.ResponseWriter` with err HTTP status code, err message and err type (type e.g. `errsuit.TypeNotFound`).
 // If err is type of `error` then converts it to `AppError`.
 // Return `false` if err is nil, otherwise return true.
-func (h *GinErrorHandler) HandleError(c *gin.Context, err error) bool {
+func (h *HttpErrorHandler) HandleError(w http.ResponseWriter, err error) bool {
 	appErr := errsuit.AsAppError(err)
 	if appErr == nil {
 		return false
@@ -39,12 +41,11 @@ func (h *GinErrorHandler) HandleError(c *gin.Context, err error) bool {
 		msg = "internal server error"
 	}
 
-	c.JSON(appErr.Code, errsuit.ErrorResponse{
+	w.WriteHeader(appErr.Code)
+	json.NewEncoder(w).Encode(errsuit.ErrorResponse{
 		ErrMsg: msg,
 		Typ:    appErr.Type,
 	})
-
-	c.Abort()
 
 	return true
 }
