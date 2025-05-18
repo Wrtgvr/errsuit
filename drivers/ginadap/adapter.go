@@ -2,7 +2,7 @@ package ginadap
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/wrtgvr2/errsuit"
+	errsuit "github.com/wrtgvr2/errsuit/core"
 )
 
 // Gin error handler.

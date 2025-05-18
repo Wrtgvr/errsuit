@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/wrtgvr2/errsuit"
+	errsuit "github.com/wrtgvr2/errsuit/core"
 )
 
 // `net/http` error handler.
