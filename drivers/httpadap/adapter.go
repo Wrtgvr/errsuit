@@ -23,7 +23,12 @@ func NewHttpErrorHandler(logger *errsuit.Logger) *HttpErrorHandler {
 // Send response via `http.ResponseWriter` with err HTTP status code, err message and err type (type e.g. `errsuit.TypeNotFound`).
 // If err is type of `error` then converts it to `AppError`.
 // Return `false` if err is nil, otherwise return true.
-func (h *HttpErrorHandler) HandleError(w http.ResponseWriter, err error) bool {
+func (h *HttpErrorHandler) HandleError(ctx any, err error) bool {
+	w, ok := ctx.(http.ResponseWriter)
+	if !ok {
+		return false
+	}
+
 	appErr := errsuit.AsAppError(err)
 	if appErr == nil {
 		return false

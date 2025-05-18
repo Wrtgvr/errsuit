@@ -4,3 +4,7 @@ type ErrorResponse struct {
 	ErrMsg string `json:"error"`
 	Typ    string `json:"type"`
 }
+
+type ErrorHandler interface {
+	HandleError(any, error) bool
+}
