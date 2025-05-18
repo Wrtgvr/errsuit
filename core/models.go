@@ -6,5 +6,12 @@ type ErrorResponse struct {
 }
 
 type ErrorHandler interface {
-	HandleError(any, error) bool
+	HandleError(Context, error) bool
+}
+
+type Context interface {
+	SetHeader(key, value string)
+	GetHeader(key string) string
+	SetStatus(code int)
+	Write(body []byte)
 }
