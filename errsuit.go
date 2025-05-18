@@ -3,7 +3,6 @@ package errsuit
 import (
 	"errors"
 	"fmt"
-	"log"
 	"net/http"
 )
 
@@ -32,11 +31,6 @@ func (e *AppError) Error() string {
 // ShouldLog tells whether the error should be logged by a driver.
 func (e *AppError) ShouldLog() bool {
 	return e.Log
-}
-
-// LogError logs the error via the standard log package.
-func (e *AppError) LogError() {
-	log.Println(e.Error())
 }
 
 // New creates a new AppError.
