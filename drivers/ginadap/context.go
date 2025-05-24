@@ -2,7 +2,7 @@ package ginadap
 
 import (
 	"github.com/gin-gonic/gin"
-	errsuit "github.com/wrtgvr2/errsuit/core"
+	errsuit "github.com/wrtgvr/errsuit/core"
 )
 
 type GinContext struct {

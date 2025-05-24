@@ -3,7 +3,7 @@ package ginadap
 import (
 	"net/http"
 
-	errsuit "github.com/wrtgvr2/errsuit/core"
+	errsuit "github.com/wrtgvr/errsuit/core"
 )
 
 type HttpContext struct {

@@ -1,7 +1,7 @@
 package ginadap
 
 import (
-	errsuit "github.com/wrtgvr2/errsuit/core"
+	errsuit "github.com/wrtgvr/errsuit/core"
 )
 
 // `net/http` error handler.
