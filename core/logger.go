@@ -28,7 +28,8 @@ func NewLogger(out io.Writer, f func(error) string) *Logger {
 
 // Default error formatter.
 func DefaultFormat(err error) string {
-	return fmt.Sprintf("[ERROR] %v", err)
+	appErr := AsAppError(err)
+	return fmt.Sprintf("[ERROR] %v", appErr.Err)
 }
 
 // Log error formatted by `logger.format(err)` in `logger.out`.
@@ -36,5 +37,6 @@ func (l *Logger) LogError(err error) {
 	if err == nil {
 		return
 	}
-	fmt.Fprintln(l.out, l.format(err))
+	appErr := AsAppError(err)
+	fmt.Fprintln(l.out, l.format(appErr))
 }
