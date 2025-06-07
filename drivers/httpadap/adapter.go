@@ -12,7 +12,7 @@ type HttpErrorHandler struct {
 }
 
 // Returns `HttpErrorHandler` with given `errsuit.Logger` (may be nil).
-func NewGinErrorHandler(logger *errsuit.Logger) *HttpErrorHandler {
+func NewHttpErrorHandler(logger *errsuit.Logger) *HttpErrorHandler {
 	return &HttpErrorHandler{
 		logger: logger,
 	}
