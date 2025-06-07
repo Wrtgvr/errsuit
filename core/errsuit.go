@@ -15,15 +15,15 @@ type Config struct {
 // AppError represents a structured application error with optional logging and HTTP compatibility.
 type AppError struct {
 	// Type categorizes the error (e.g., "not_found", "internal").
-	Type string `json:"type"`
+	Type string `json:"type" xml:"type" yaml:"type"`
 	// Message is the error message shown to clients.
-	Message string `json:"message"`
+	Message string `json:"message" xml:"message" yaml:"message"`
 	// Code is the HTTP status code returned in responses.
-	Code int `json:"code"`
+	Code int `json:"code" xml:"code" yaml:"code"`
 	// Err is the original internal error (not included in JSON response).
-	Err error `json:"-"`
+	Err error `json:"-" xml:"-" yaml:"-"`
 	// Log indicates whether the error should be logged automatically.
-	Log bool `json:"-"`
+	Log bool `json:"-" xml:"-" yaml:"-"`
 }
 
 // Error returns a formatted string for the error.
