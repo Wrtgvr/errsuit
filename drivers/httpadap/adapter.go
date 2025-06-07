@@ -7,12 +7,12 @@ import (
 // `net/http` error handler.
 // logger is optional. If logger is nil errors won't be logged.
 type HttpErrorHandler struct {
-	logger *errsuit.Logger
+	logger errsuit.ErrorLogger
 	cfg    errsuit.Config
 }
 
 // Returns `HttpErrorHandler` with given `errsuit.Logger` (may be nil).
-func NewHttpErrorHandler(logger *errsuit.Logger) *HttpErrorHandler {
+func NewHttpErrorHandler(logger errsuit.ErrorLogger) *HttpErrorHandler {
 	return &HttpErrorHandler{
 		logger: logger,
 	}

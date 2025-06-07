@@ -7,12 +7,12 @@ import (
 // Gin error handler.
 // logger is optional. If logger is nil errors won't be logged.
 type GinErrorHandler struct {
-	logger *errsuit.Logger
+	logger errsuit.ErrorLogger
 	cfg    errsuit.Config
 }
 
 // Returns `GinErrorHandler` with given `errsuit.Logger` (may be nil).
-func NewGinErrorHandler(logger *errsuit.Logger) *GinErrorHandler {
+func NewGinErrorHandler(logger errsuit.ErrorLogger) *GinErrorHandler {
 	return &GinErrorHandler{
 		logger: logger,
 	}
