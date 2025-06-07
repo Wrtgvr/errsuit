@@ -12,9 +12,10 @@ type GinErrorHandler struct {
 }
 
 // Returns `GinErrorHandler` with given `errsuit.Logger` (may be nil).
-func NewGinErrorHandler(logger errsuit.ErrorLogger) *GinErrorHandler {
+func NewGinErrorHandler(logger errsuit.ErrorLogger, cfg errsuit.Config) *GinErrorHandler {
 	return &GinErrorHandler{
 		logger: logger,
+		cfg:    cfg,
 	}
 }
 

@@ -12,9 +12,10 @@ type HttpErrorHandler struct {
 }
 
 // Returns `HttpErrorHandler` with given `errsuit.Logger` (may be nil).
-func NewHttpErrorHandler(logger errsuit.ErrorLogger) *HttpErrorHandler {
+func NewHttpErrorHandler(logger errsuit.ErrorLogger, cfg errsuit.Config) *HttpErrorHandler {
 	return &HttpErrorHandler{
 		logger: logger,
+		cfg:    cfg,
 	}
 }
 
