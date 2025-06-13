@@ -2,8 +2,6 @@ package ginadap
 
 import (
 	"net/http"
-
-	errsuit "github.com/wrtgvr/errsuit/core"
 )
 
 type HttpContext struct {
@@ -11,7 +9,7 @@ type HttpContext struct {
 	R *http.Request
 }
 
-func ContextFromGin(w http.ResponseWriter, r *http.Request) errsuit.Context {
+func ContextFromHttp(w http.ResponseWriter, r *http.Request) *HttpContext {
 	return &HttpContext{
 		W: w,
 		R: r,

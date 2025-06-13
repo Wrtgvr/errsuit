@@ -2,14 +2,13 @@ package ginadap
 
 import (
 	"github.com/gin-gonic/gin"
-	errsuit "github.com/wrtgvr/errsuit/core"
 )
 
 type GinContext struct {
 	C *gin.Context
 }
 
-func ContextFromGin(c *gin.Context) errsuit.Context {
+func ContextFromGin(c *gin.Context) *GinContext {
 	return &GinContext{
 		C: c,
 	}
