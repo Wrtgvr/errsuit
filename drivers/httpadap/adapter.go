@@ -36,3 +36,10 @@ func (h *HttpErrorHandler) HandleError(ctx HttpContext, err error) bool {
 
 	return true
 }
+
+// Creates ErrorHandler and call HandleError
+func HandleError(ctx HttpContext, err error, format errsuit.ResponseFormat, logger errsuit.ErrorLogger) bool {
+	return NewHttpErrorHandler(errsuit.Config{
+		Format: format,
+	}, logger).HandleError(ctx, err)
+}
