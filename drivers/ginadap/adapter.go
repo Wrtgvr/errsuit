@@ -39,8 +39,8 @@ func (h *GinErrorHandler) HandleError(ctx *GinContext, err error) bool {
 }
 
 // Creates ErrorHandler and call HandleError
-func HandleError(ctx *GinContext, err error, format errsuit.ResponseFormat, logger errsuit.ErrorLogger) bool {
+func HandleError(ctx *GinContext, err error, format errsuit.ResponseFormat) bool {
 	return NewGinErrorHandler(errsuit.Config{
 		Format: format,
-	}, logger).HandleError(ctx, err)
+	}, nil).HandleError(ctx, err)
 }

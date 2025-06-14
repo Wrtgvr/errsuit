@@ -38,8 +38,8 @@ func (h *HttpErrorHandler) HandleError(ctx *HttpContext, err error) bool {
 }
 
 // Creates ErrorHandler and call HandleError
-func HandleError(ctx *HttpContext, err error, format errsuit.ResponseFormat, logger errsuit.ErrorLogger) bool {
+func HandleError(ctx *HttpContext, err error, format errsuit.ResponseFormat) bool {
 	return NewHttpErrorHandler(errsuit.Config{
 		Format: format,
-	}, logger).HandleError(ctx, err)
+	}, nil).HandleError(ctx, err)
 }
