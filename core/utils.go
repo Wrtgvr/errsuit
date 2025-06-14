@@ -10,10 +10,10 @@ import (
 )
 
 func BuildErrorResp(appErr *AppError) ErrorResponse {
-	msg := appErr.Message
 	return ErrorResponse{
-		msg,
-		appErr.Type,
+		ErrMsg: appErr.Message,
+		Typ:    appErr.Type,
+		Code:   appErr.Code,
 	}
 }
 

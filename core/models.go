@@ -3,6 +3,7 @@ package errsuit
 type ErrorResponse struct {
 	ErrMsg string `json:"error"`
 	Typ    string `json:"type"`
+	Code   int    `json:"code,omitempty"`
 }
 
 type ErrorHandler interface {
