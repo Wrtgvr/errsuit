@@ -48,7 +48,7 @@ func New(msg string, code int, typ string, err error, log bool) *AppError {
 		Type:    typ,
 		Message: msg,
 		Code:    code,
-		Err:     err,
+		Err:     fmt.Errorf("%w", err),
 		Log:     log,
 	}
 }
