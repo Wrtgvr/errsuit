@@ -3,6 +3,7 @@ package errsuit
 import (
 	"encoding/json"
 	"encoding/xml"
+	"fmt"
 	"strings"
 
 	"gopkg.in/yaml.v3"
@@ -10,9 +11,6 @@ import (
 
 func BuildErrorResp(appErr *AppError) ErrorResponse {
 	msg := appErr.Message
-	if appErr.Type == TypeInternal {
-		msg = "internal server error"
-	}
 	return ErrorResponse{
 		msg,
 		appErr.Type,
@@ -60,7 +58,7 @@ func WriteError(ctx Context, err *AppError, format ResponseFormat) {
 		ctx.Write(b)
 	case ResponseFormatPlainText:
 		ctx.SetHeader("Content-Type", "text/plain")
-		b, _ := json.Marshal(body)
+		b := []byte(fmt.Sprintf("%s: %s", body.Typ, body.ErrMsg))
 		ctx.Write(b)
 	}
 }
