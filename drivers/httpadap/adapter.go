@@ -1,4 +1,4 @@
-package ginadap
+package httpadap
 
 import (
 	errsuit "github.com/wrtgvr/errsuit/core"
