@@ -7,7 +7,7 @@ type ErrorResponse struct {
 }
 
 type ErrorHandler interface {
-	HandleError(Context, error, ResponseFormat) bool
+	HandleError(Context, error) bool
 }
 
 type Context interface {

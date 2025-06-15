@@ -9,9 +9,9 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func MakeHandlerFunc(h ErrorHandler, ctx Context, f ResponseFormat) func(err error) bool {
+func MakeHandlerFunc(h ErrorHandler, ctx Context) func(err error) bool {
 	return func(err error) bool {
-		return h.HandleError(ctx, err, f)
+		return h.HandleError(ctx, err)
 	}
 }
 
