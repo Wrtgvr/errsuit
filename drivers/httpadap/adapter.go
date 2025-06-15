@@ -22,7 +22,12 @@ func NewHttpErrorHandler(cfg errsuit.Config, logger errsuit.ErrorLogger) *HttpEr
 // Send response via gin.Context with err HTTP status code, err message and err type (type e.g. `errsuit.TypeNotFound`).
 // If err is type of `error` then converts it to `AppError`.
 // Return `false` if err is nil, otherwise return true.
-func (h *HttpErrorHandler) HandleError(ctx *HttpContext, err error) bool {
+func (h HttpErrorHandler) HandleError(ctx errsuit.Context, err error) bool {
+	httpCtx, ok := ctx.(*HttpContext)
+	if !ok {
+		panic("GinErrorHandler: invlaid context type passed")
+	}
+
 	appErr := errsuit.AsAppError(err)
 	if appErr == nil {
 		return false
@@ -32,7 +37,7 @@ func (h *HttpErrorHandler) HandleError(ctx *HttpContext, err error) bool {
 		h.logger.LogError(appErr)
 	}
 
-	errsuit.WriteError(ctx, appErr, h.cfg.Format)
+	errsuit.WriteError(httpCtx, appErr, h.cfg.Format)
 
 	return true
 }
