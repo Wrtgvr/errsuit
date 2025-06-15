@@ -9,7 +9,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func MakeHandlerFunc(h ErrorHandler, ctx Context) func(err error) bool {
+func MakeHandlerFunc(h ErrorHandler, ctx Context) func(error) bool {
 	return func(err error) bool {
 		return h.HandleError(ctx, err)
 	}
@@ -64,7 +64,7 @@ func WriteError(ctx Context, err *AppError, format ResponseFormat) {
 		ctx.Write(b)
 	case ResponseFormatPlainText:
 		ctx.SetHeader("Content-Type", "text/plain")
-		b := []byte(fmt.Sprintf("%s: %s", body.Typ, body.ErrMsg))
+		b := fmt.Appendf(nil, "%s: %s", body.Typ, body.ErrMsg)
 		ctx.Write(b)
 	}
 }
