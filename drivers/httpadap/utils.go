@@ -10,7 +10,7 @@ import (
 func HandleError(ctx HttpContext, err error, format errsuit.ResponseFormat) bool {
 	return NewHttpErrorHandler(errsuit.Config{
 		Format: format,
-	}, nil).HandleError(ctx, err)
+	}).HandleError(ctx, err)
 }
 
 func Handle(w http.ResponseWriter, r *http.Request, h *HttpErrorHandler, err error) bool {
