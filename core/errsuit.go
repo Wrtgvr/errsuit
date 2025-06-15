@@ -10,6 +10,8 @@ import (
 type Config struct {
 	// Define response format (JSON, XML and etc.)
 	Format ResponseFormat
+	// Define logger for errors
+	Logger ErrorLogger
 }
 
 // AppError represents a structured application error with optional logging and HTTP compatibility.

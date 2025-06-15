@@ -7,15 +7,13 @@ import (
 // Gin error handler.
 // logger is optional. If logger is nil errors won't be logged.
 type GinErrorHandler struct {
-	logger errsuit.ErrorLogger
-	cfg    errsuit.Config
+	cfg errsuit.Config
 }
 
 // Returns `GinErrorHandler` with given `errsuit.Logger` (may be nil).
-func NewGinErrorHandler(cfg errsuit.Config, logger errsuit.ErrorLogger) *GinErrorHandler {
+func NewGinErrorHandler(cfg errsuit.Config) *GinErrorHandler {
 	return &GinErrorHandler{
-		logger: logger,
-		cfg:    cfg,
+		cfg: cfg,
 	}
 }
 
@@ -33,8 +31,8 @@ func (h GinErrorHandler) HandleError(ctx errsuit.Context, err error) bool {
 		return false
 	}
 
-	if appErr.ShouldLog() && h.logger != nil {
-		h.logger.LogError(appErr)
+	if appErr.ShouldLog() && h.cfg.Logger != nil {
+		h.cfg.Logger.LogError(appErr)
 	}
 
 	errsuit.WriteError(ginCtx, appErr, h.cfg.Format)
